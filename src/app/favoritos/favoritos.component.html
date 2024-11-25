@@ -1,0 +1,12 @@
+<h2>Meus Livros Favoritos</h2>
+<div *ngIf="favoritos.length > 0; else noFavorites">
+  <ul>
+    <li *ngFor="let book of favoritos">
+      <h3>{{ book.volumeInfo.title }}</h3>
+      <p>{{ book.volumeInfo.authors?.join(', ') }}</p>
+    </li>
+  </ul>
+</div>
+<ng-template #noFavorites>
+  <p>Você ainda não adicionou nenhum livro aos favoritos.</p>
+</ng-template>

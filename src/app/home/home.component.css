@@ -1,0 +1,82 @@
+h1{
+    font-size: 66px;
+    padding-top:100px;
+    
+  }
+  
+  h1 strong{
+    text-transform: uppercase;
+    color: #ba0505;
+  }
+  
+  main{
+    display: flex;
+    gap: 3rem;
+    padding: 90px;
+  }
+  main>*{
+    flex: 1 0 0;
+  }
+  
+  
+  .animation{
+    position: relative;
+    margin-left: 6rem;
+    margin-top: 7rem;
+  }
+
+  .animation img{
+    position: absolute;
+    border-radius: 5px;
+    height: 220px;
+  }
+.animation img:nth-child(1){
+    left:120px;
+    top: 160px;
+    animation: topleft 3s .4s infinite alternate;
+}
+
+.animation img:nth-child(2){
+    right: 130px;
+    top: 160px;
+    z-index: 1;
+    animation: topleft 3s .4s infinite alternate;
+}
+
+.animation img:nth-child(3){
+    right: 10px;
+    top: -90px;
+    animation: topleft 3s .4s infinite alternate;
+}
+
+.animation img:nth-child(4){
+    left:20px;
+    top: -90px;
+    animation: topleft 3s .4s infinite alternate;
+}
+
+.animation img:nth-child(5){
+    left:230px;
+    top: -130px;
+    animation: topleft 3s .4s infinite alternate;
+}
+
+/*
+.animation img:nth-child(6){
+    outline: 2px solid rgb(202, 0, 131);
+    left:230px;
+    top: -100px;
+    animation: topleft 6s .2s infinite alternate;
+}
+*/
+
+@keyframes topleft{
+    from{
+        transform: translate(0, 0);
+    }
+
+    to{
+        transform: translate(-10px, -10px );
+
+    }
+  }

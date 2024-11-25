@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+/* Reset básico e configuração global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif; /* Fonte padrão */
+  }
+  
+  /* Estilo para o body */
+  body {
+    background-image: radial-gradient(at 0 0, rgb(255, 255, 255), #00000045);
+  }
+  
+  /* Responsividade */
+  @media (max-width: 600px) {
+    /* Estilos para telas pequenas (celulares) */
+    body {
+      background-image: radial-gradient(at 0 0, rgb(255, 255, 255), #00000085);
+      font-size: 14px; /* Fonte menor */
+    }
+  
+    .container {
+      padding: 10px;
+      flex-direction: column;
+    }
+  }
+  
+  @media (min-width: 601px) and (max-width: 1024px) {
+    /* Estilos para tablets */
+    body {
+      background-image: radial-gradient(at 50% 50%, rgb(255, 255, 255), #00000035);
+      font-size: 16px;
+    }
+  
+    .container {
+      padding: 20px;
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    /* Estilos para telas maiores (desktop) */
+    body {
+      background-image: radial-gradient(at 50% 50%, rgb(255, 255, 255), #00000025);
+      font-size: 18px;
+    }
+  
+    .container {
+      padding: 30px;
+      justify-content: space-between;
+    }
+  }
