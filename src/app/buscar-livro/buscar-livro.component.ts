@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { FavoritosService } from '../services/favoritos.service';
 
 @Component({
   selector: 'app-buscar-livro',
@@ -12,7 +13,9 @@ export class BuscarLivroComponent {
   isLoading: boolean = false;
   errorMessage: string = '';
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService,
+    private favoritosService: FavoritosService
+  ) {}
 
   searchBooks(): void {
     if (!this.searchQuery.trim()) {
@@ -36,4 +39,18 @@ export class BuscarLivroComponent {
       }
     );
   }
+  toggleFavoritos(books: any): void {
+    if (this.favoritosService.isFavoritos(books.id)) {
+      this.favoritosService.removeFavoritos(books.id);
+    } else {
+      this.favoritosService.addFavoritos(books);
+    }
+  }
+  
+  
+  isFavoritos(bookId: string): boolean {
+    return this.favoritosService.isFavoritos(bookId);
+  }
+
 }
+

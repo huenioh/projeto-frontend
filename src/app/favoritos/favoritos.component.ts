@@ -1,17 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { FavoritosService } from '../services/favoritos.service';
 
 @Component({
   selector: 'app-favoritos',
   templateUrl: './favoritos.component.html',
   styleUrls: ['./favoritos.component.css']
 })
-export class FavoritosComponent {
+export class FavoritosComponent implements OnInit {
   favoritos: any[] = [];
 
-  constructor() {
-    const storedFavorites = localStorage.getItem('favoritos');
-    if (storedFavorites) {
-      this.favoritos = JSON.parse(storedFavorites);
+  constructor(private favoritosService: FavoritosService) {}
+    ngOnInit(): void {
+      this.loadFavoritos();
     }
-  }
+  
+    loadFavoritos(): void {
+      this.favoritos = this.favoritosService.getFavoritos();
+    }
+  
+    removeFavoritos(bookId: string): void {
+      this.favoritosService.removeFavoritos(bookId);
+      this.loadFavoritos();
+    }
 }
+  
