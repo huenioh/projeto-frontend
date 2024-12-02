@@ -1,5 +1,5 @@
 /* Lista */
-li {
+li  {
     display: flex;
     align-items: flex-start;
     margin-bottom: 15px;
@@ -7,14 +7,10 @@ li {
     border: 1px solid #ddd;
     border-radius: 8px;
     background: #fff;
-    transition: all 0.3s ease;
   }
   
-  li:hover {
-    transform: scale(1.02);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-  }
   
+
   /* Imagem */
   img {
     width: 80px;

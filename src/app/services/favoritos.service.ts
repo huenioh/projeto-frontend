@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -10,7 +9,7 @@ export class FavoritosService {
 
   constructor() {
     // Inicializa a lista de favoritos ao carregar o serviço
-    this.favoritos = this.getFavoritos();
+    this.favoritos = this.loadFavoritosFromStorage();
   }
 
   /**
@@ -18,35 +17,34 @@ export class FavoritosService {
    */
   addFavoritos(book: any): void {
     const newFavoritos = {
-      id: book.id, // ID do livro
-      title: book.title, // Título do livro
-      author_name: book.author_name || [], // Lista de autores (ou vazio)
-      cover: book.cover_i
-        ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` // URL da capa se disponível
-        : 'https://via.placeholder.com/80x120?text=Sem+Capa', // URL da imagem padrão
+      id: book.id,
+      title: book.title,
+      author_name: book.author_name || [],
+      cover: book.cover || 'https://via.placeholder.com/80x120?text=Sem+Capa'
     };
 
     // Verifica se o livro já está nos favoritos
     if (!this.isFavoritos(newFavoritos.id)) {
-      this.favoritos.push(newFavoritos); // Adiciona o livro
-      this.saveFavoritos(); // Salva a lista no localStorage
+      this.favoritos.push(newFavoritos);
+      console.log(newFavoritos); // Verifique a URL da capa
+      this.saveFavoritosToStorage(); // Salva a lista no localStorage
     }
   }
+
 
   /**
    * Remove um livro dos favoritos
    */
   removeFavoritos(bookId: string): void {
     this.favoritos = this.favoritos.filter((b) => b.id !== bookId); // Remove pelo ID
-    this.saveFavoritos(); // Salva a lista atualizada
+    this.saveFavoritosToStorage(); // Salva a lista atualizada
   }
 
   /**
    * Obtém a lista de favoritos
    */
   getFavoritos(): any[] {
-    // Retorna a lista do localStorage ou um array vazio
-    return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
+    return [...this.favoritos]; // Retorna uma cópia da lista interna
   }
 
   /**
@@ -57,9 +55,22 @@ export class FavoritosService {
   }
 
   /**
+   * Carrega os favoritos do localStorage
+   */
+  private loadFavoritosFromStorage(): any[] {
+    if (typeof window !== 'undefined' && localStorage) {
+      const favoritos = localStorage.getItem(this.storageKey);
+      return favoritos ? JSON.parse(favoritos) : [];
+    }
+    return []; // Retorna uma lista vazia se não estiver no ambiente do navegador
+  }
+
+  /**
    * Salva a lista atualizada no localStorage
    */
-  private saveFavoritos(): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(this.favoritos));
+  private saveFavoritosToStorage(): void {
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.setItem(this.storageKey, JSON.stringify(this.favoritos));
+    }
   }
 }

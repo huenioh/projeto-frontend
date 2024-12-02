@@ -13,14 +13,13 @@ export class FavoritosComponent implements OnInit {
     ngOnInit(): void {
       this.loadFavoritos();
     }
-  
+
     loadFavoritos(): void {
       this.favoritos = this.favoritosService.getFavoritos();
     }
-  
+
     removeFavoritos(bookId: string): void {
       this.favoritosService.removeFavoritos(bookId);
       this.loadFavoritos();
     }
 }
-  

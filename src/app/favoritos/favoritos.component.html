@@ -1,20 +1,26 @@
 <div>
   <h2>Favoritos</h2>
-  
+
   <ul>
     <!-- Renderiza a lista de favoritos -->
-    <li *ngFor="let book of favoritos ">
-      <!-- Capa do Livro -->
-      <img [src]="book.cover" alt="Capa do livro" />
+    <li *ngFor="let book of favoritos" appBookListStyle >
+      <!-- Verifica se a URL da capa é válida antes de exibir a imagem -->
+      <img *ngIf="book.cover" [src]="book.cover" alt="Capa do livro" class="book-thumbnail" />
+
       <div class="book-info">
         <!-- Título -->
         <strong>{{ book.title }}</strong>
+
         <!-- Autor(es) -->
-        <p *ngIf="book.author_name.length > 0">Autor: {{ book.author_name.join(', ') }}</p>
-        <p *ngIf="book.author_name.length === 0">Autor desconhecido</p>
+        <p *ngIf="book.author_name && book.author_name.length > 0">Autor: {{ book.author_name.join(', ') }}</p>
+        <p *ngIf="!book.author_name || book.author_name.length === 0">Autor desconhecido</p>
+
         <!-- Descrição -->
-        <p>{{ book.description }}</p>
+        <p *ngIf="book.description">{{ book.description }}</p>
+        <p *ngIf="!book.description">Descrição não disponível.</p>
       </div>
+
+      <!-- Botão de Remover -->
       <button (click)="removeFavoritos(book.id)">Remover</button>
     </li>
   </ul>

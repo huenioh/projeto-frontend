@@ -13,10 +13,14 @@ export class BuscarLivroComponent {
   isLoading: boolean = false;
   errorMessage: string = '';
 
-  constructor(private apiService: ApiService,
+  constructor(
+    private apiService: ApiService,
     private favoritosService: FavoritosService
   ) {}
 
+  /**
+   * Busca livros da API.
+   */
   searchBooks(): void {
     if (!this.searchQuery.trim()) {
       this.errorMessage = 'Por favor, digite um termo de busca.';
@@ -39,18 +43,30 @@ export class BuscarLivroComponent {
       }
     );
   }
-  toggleFavoritos(books: any): void {
-    if (this.favoritosService.isFavoritos(books.id)) {
-      this.favoritosService.removeFavoritos(books.id);
+
+  /**
+   * Adiciona ou remove um livro dos favoritos.
+   */
+  toggleFavoritos(book: any): void {
+    const formattedBook = {
+      id: book.id || book.volumeInfo.id, // Use 'id' ou 'volumeInfo.id'
+      title: book.volumeInfo?.title || 'Título Desconhecido',
+      author_name: book.volumeInfo?.authors || ['Autor Desconhecido'],
+      cover: book.volumeInfo?.imageLinks?.thumbnail ||
+             'https://via.placeholder.com/80x120?text=Sem+Capa',
+    };
+
+    if (this.favoritosService.isFavoritos(formattedBook.id)) {
+      this.favoritosService.removeFavoritos(formattedBook.id);
     } else {
-      this.favoritosService.addFavoritos(books);
+      this.favoritosService.addFavoritos(formattedBook);
     }
   }
-  
-  
+
+  /**
+   * Verifica se um livro está nos favoritos.
+   */
   isFavoritos(bookId: string): boolean {
     return this.favoritosService.isFavoritos(bookId);
   }
-
 }
-

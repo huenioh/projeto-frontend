@@ -8,15 +8,14 @@
   
   /* Estilo para o body */
   body {
-    background-image: radial-gradient(at 0 0, rgb(255, 255, 255), #00000045);
+    background-color: rgb(245, 225, 201);
   }
   
   /* Responsividade */
   @media (max-width: 600px) {
     /* Estilos para telas pequenas (celulares) */
     body {
-      background-image: radial-gradient(at 0 0, rgb(255, 255, 255), #00000085);
-      font-size: 14px; /* Fonte menor */
+      font-size: 14px; /* Fonte menor */ 
     }
   
     .container {
@@ -28,7 +27,6 @@
   @media (min-width: 601px) and (max-width: 1024px) {
     /* Estilos para tablets */
     body {
-      background-image: radial-gradient(at 50% 50%, rgb(255, 255, 255), #00000035);
       font-size: 16px;
     }
   
@@ -42,7 +40,7 @@
   @media (min-width: 1025px) {
     /* Estilos para telas maiores (desktop) */
     body {
-      background-image: radial-gradient(at 50% 50%, rgb(255, 255, 255), #00000025);
+    
       font-size: 18px;
     }
   
